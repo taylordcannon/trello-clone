@@ -1,0 +1,16 @@
+.List {
+    background: #dfe3e6;
+    flex-shrink: 0;
+    width: 272px;
+    height: fit-content;
+    margin: 10px;
+    margin-right: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .List-Title {
+    cursor: pointer;
+    padding: 10px;
+    overflow-wrap: break-word;
+  }
