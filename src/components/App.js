@@ -6,8 +6,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Header">React Trello Clone</div>
-        <Board></Board>
+        <img className="Header"
+             src="./assets/icons/trello-clone-logo.svg"
+             alt="Trello Clone Icon"></img>
+        <Board>
+        </Board>
       </div>
     );
   }

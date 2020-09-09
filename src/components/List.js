@@ -4,10 +4,34 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Card from "./Card";
+import CardEditor from "./CardEditor";
+
+import shortid from "shortid";
 
 class List extends Component {
+  state = {
+    addingCard: false
+  };
+
+  toggleAddingCard = () =>
+    this.setState({ addingCard: !this.state.addingCard });
+
+  addCard = async cardText => {
+    const { listId, dispatch } = this.props;
+
+    this.toggleAddingCard();
+
+    const cardId = shortid.generate();
+
+    dispatch({
+      type: "ADD_CARD",
+      payload: { cardText, cardId, listId }
+    });
+  };
+
   render() {
     const { list } = this.props;
+    const { editingTitle, addingCard, title } = this.state;
 
     return (
       <div className="List">
@@ -24,6 +48,17 @@ class List extends Component {
               listId={list._id}
             />
           ))}
+          {addingCard ? (
+          <CardEditor
+            onSave={this.addCard}
+            onCancel={this.toggleAddingCard}
+            adding
+            />
+          ) : (
+            <div className="Toggle-Add-Card" onClick={this.toggleAddingCard}>
+              <ion-icon name="add" /> Add a card
+            </div>
+          )}
       </div>
     );
   }
@@ -32,5 +67,6 @@ class List extends Component {
 const mapStateToProps = (state, ownProps) => ({
   list: state.listsById[ownProps.listId]
 });
+
 
 export default connect(mapStateToProps)(List);
